@@ -59,4 +59,10 @@ describe Cell do
       expect(@cell.fired_upon?).to eq(true)
     end
   end
+
+  describe '#render' do
+    it 'can render cell' do
+      expect(@cell.render).to eq(".")
+    end
+  end
 end
