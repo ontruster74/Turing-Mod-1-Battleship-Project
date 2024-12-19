@@ -71,7 +71,11 @@ describe Cell do
     end
 
     it 'can render sunk cell' do
-
+      @cell.place_ship(@cruiser)
+      @cell.fire_upon()
+      @cruiser.hit
+      @cruiser.hit
+      expect(@cell.render).to eq("X")
     end
 
     it 'can render hit cell' do
