@@ -44,4 +44,12 @@ describe Cell do
       expect(@cell.ship.health).to eq(2)
     end
   end
+
+  describe '#fired_upon?' do
+    it 'tracks if it has been fired upon' do
+      @cell.fire_upon
+
+      expect(@cell.fired_upon?).to eq(true)
+    end
+  end
 end
