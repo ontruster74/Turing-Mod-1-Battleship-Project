@@ -43,6 +43,13 @@ describe Cell do
 
       expect(@cell.ship.health).to eq(2)
     end
+
+    it 'can be fired upon when empty' do
+      @cell.fire_upon
+
+      expect(@cell.empty?).to eq(true)
+      expect(@cell.fired_upon?).to eq(true)
+    end
   end
 
   describe '#fired_upon?' do
