@@ -35,4 +35,13 @@ describe Cell do
       expect(@cell.empty?).to eq(false)
     end
   end
+
+  describe '#fire_upon' do
+    it 'can be fired upon' do
+      @cell.place_ship(@cruiser)
+      @cell.fire_upon
+
+      expect(@cell.ship.health).to eq(2)
+    end
+  end
 end
