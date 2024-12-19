@@ -64,5 +64,18 @@ describe Cell do
     it 'can render cell' do
       expect(@cell.render).to eq(".")
     end
+
+    it 'can render empty cell' do
+      @cell.fire_upon
+      expect(@cell.render).to eq("M")
+    end
+
+    it 'can render sunk cell' do
+
+    end
+
+    it 'can render hit cell' do
+      
+    end
   end
 end
