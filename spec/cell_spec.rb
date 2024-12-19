@@ -79,7 +79,9 @@ describe Cell do
     end
 
     it 'can render hit cell' do
-      
+      @cell.place_ship(@cruiser)
+      @cell.fire_upon()
+      expect(@cell.render).to eq("H")
     end
   end
 end
