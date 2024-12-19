@@ -59,4 +59,29 @@ describe Cell do
       expect(@cell.fired_upon?).to eq(true)
     end
   end
+
+  describe '#render' do
+    it 'can render cell' do
+      expect(@cell.render).to eq(".")
+    end
+
+    it 'can render empty cell' do
+      @cell.fire_upon
+      expect(@cell.render).to eq("M")
+    end
+
+    it 'can render sunk cell' do
+      @cell.place_ship(@cruiser)
+      @cell.fire_upon()
+      @cruiser.hit
+      @cruiser.hit
+      expect(@cell.render).to eq("X")
+    end
+
+    it 'can render hit cell' do
+      @cell.place_ship(@cruiser)
+      @cell.fire_upon()
+      expect(@cell.render).to eq("H")
+    end
+  end
 end

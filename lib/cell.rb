@@ -27,4 +27,18 @@ class Cell
   def fired_upon?
     @fired_upon
   end
+
+  def render 
+    if !@fired_upon
+      "."
+    elsif @empty
+      "M"
+    elsif @ship.sunk?
+      "X"
+    else
+      "H"
+    end
+  
+    
+  end
 end
