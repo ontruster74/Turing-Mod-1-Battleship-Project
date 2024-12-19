@@ -31,10 +31,10 @@ class Cell
   def render 
     if !@fired_upon
       "."
-    elsif @ship.sunk?
-      "X"
     elsif @empty
       "M"
+    elsif @ship.sunk?
+      "X"
     else
       "H"
     end
