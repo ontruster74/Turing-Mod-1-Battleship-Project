@@ -25,5 +25,9 @@ class Board
     num_array = coordinates.map { |coordinate| coordinate[1] }
     return num_array.all? { |num| num == num_array[0] } || char_array.all? { |char| char == char_array[0] }
   end
-  
+
+  def place(ship, coordinates)
+    coordinates.each { |coordinate| @cells[coordinate].place_ship(ship)}
+  end
+
 end
