@@ -46,5 +46,10 @@ describe Board do
       expect(@board.valid_placement?(@cruiser, ["A3", "A2", "A1"]).to eq(false))
       expect(@board.valid_placement?(@submarine, ["C1", "B1"]).to eq(false))
     end
+
+    it 'can validate diagonal coordinates' do
+      expect(@board.valid_placement?(@cruiser, ["A1", "B2", "C3"]).to eq(false))
+      expect(@board.valid_placement?(@submarine, ["C2", "D3"]).to eq(false))
+    end
   end
 end
