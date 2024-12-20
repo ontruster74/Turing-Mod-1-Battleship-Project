@@ -2,6 +2,7 @@ require 'rspec'
 require './lib/cell'
 require './lib/ship'
 require './lib/board'
+require 'pry'
 
 describe Board do
   before do
@@ -55,6 +56,29 @@ describe Board do
     it 'can validate correct placements' do
       expect(@board.valid_placement?(@submarine, ["A1", "A2"])).to eq(true)
       expect(@board.valid_placement?(@cruiser, ["B1", "C1", "D1"])).to eq(true)
+    end
+
+    it 'can validate overlapping placements' do
+      @board.place(@cruiser, ["A1", "A2", "A3"])
+      expect(@board.valid_placement?(@submarine, ["A1", "B1"])).to eq(false)
+    end
+  end
+
+  describe '#place' do
+    it 'can place ships in cells' do
+      @board.place(@cruiser, ["A1", "A2", "A3"])
+      expect(@board.cells["A1"].ship).to eq(@cruiser)
+      expect(@board.cells["A2"].ship).to eq(@cruiser)
+      expect(@board.cells["A3"].ship).to eq(@cruiser)
+      expect(@board.cells["A2"].ship).to eq(@board.cells["A3"].ship)
+    end
+  end
+
+  describe '#render' do
+    it 'can render cells as a visible board' do
+      @board.place(@cruiser, ["A1", "A2", "A3"])
+      expect(@board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(@board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
     end
   end
 end
