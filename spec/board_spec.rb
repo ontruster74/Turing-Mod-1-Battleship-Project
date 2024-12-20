@@ -2,6 +2,7 @@ require 'rspec'
 require './lib/cell'
 require './lib/ship'
 require './lib/board'
+require 'pry'
 
 describe Board do
   before do
