@@ -15,9 +15,11 @@ describe Board do
   end
 
   describe '#cells' do
-    expect(@board.cells.size).to eq(16)
+    it 'has a board of 16 cell objects' do
+      expect(@board.cells.size).to eq(16)
 
-    @board.cells.values.each { |cell| expect(cell).to be_a(Cell)}
+      @board.cells.values.each {|cell| expect(cell).to be_a(Cell)}
+    end
   end
-  
+
 end
