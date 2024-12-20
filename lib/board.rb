@@ -15,6 +15,7 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
+    coordinates.each {|coordinate| return false if !(@cells[coordinate].empty?)}
     return false if ship.length != coordinates.length
 
     range = coordinates.first..coordinates.last
