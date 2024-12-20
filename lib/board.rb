@@ -31,4 +31,41 @@ class Board
     coordinates.each { |coordinate| @cells[coordinate].place_ship(ship)}
   end
 
+  def render(show_ships = false)
+    final_render = "  1 2 3 4 \n"
+
+    if show_ships
+      renders = @cells.map do |key, cell| 
+        (cell.render == "." && !cell.empty?) ? "S" : cell.render
+      end
+
+      render_rows = []
+      renders.each_slice(4) {|row| render_rows << row}
+
+      4.times do |index|
+        final_render << "#{(index + 65).chr}" 
+        render_rows[index].each do |render|
+          final_render << " #{render}"
+          
+        end
+        final_render << " \n"
+      end
+    else
+      renders = @cells.map{|key, cell| cell.render}
+      render_rows = []
+      renders.each_slice(4) {|row| render_rows << row}
+
+      4.times do |index|
+        final_render << "#{(index + 65).chr}" 
+        render_rows[index].each do |render|
+          final_render << " #{render}"
+          
+        end
+        final_render << " \n"
+      end
+    end
+
+    return final_render
+  end
+
 end
