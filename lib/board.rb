@@ -8,21 +8,22 @@ class Board
         @cells["#{(letter + 65).chr}#{number + 1}"] = Cell.new("#{(letter + 65).chr}#{number + 1}")
       end
     end
-
-    def valid_coordinate?(coordinate)
-      @cells.include?(coordinate)
-    end
-
-    def valid_placement?(ship, coordinates)
-      return false if ship.length != coordinates.length
-
-      range = coordinates.first..coordinates.last
-      char_array = coordinates.map { |coordinate| coordinate[0] }
-      char_range = char_array.first..char_array.last
-      return false if range.to_a != coordinates && char_range.to_a != char_array
-
-      num_array = coordinates.map { |coordinate| coordinate[1] }
-      return num_array.all? { |num| num == num_array[0] } || char_array.all? { |char| char == char_array[0] }
-    end
   end
+    
+  def valid_coordinate?(coordinate)
+    @cells.include?(coordinate)
+  end
+
+  def valid_placement?(ship, coordinates)
+    return false if ship.length != coordinates.length
+
+    range = coordinates.first..coordinates.last
+    char_array = coordinates.map { |coordinate| coordinate[0] }
+    char_range = char_array.first..char_array.last
+    return false if range.to_a != coordinates && char_range.to_a != char_array
+
+    num_array = coordinates.map { |coordinate| coordinate[1] }
+    return num_array.all? { |num| num == num_array[0] } || char_array.all? { |char| char == char_array[0] }
+  end
+  
 end
