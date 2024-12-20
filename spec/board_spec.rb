@@ -6,6 +6,8 @@ require './lib/board'
 describe Board do
   before do
     @board = Board.new
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
   end
 
   describe '#initialize' do
@@ -32,4 +34,14 @@ describe Board do
     end
   end
 
+  describe '#valid_placement?' do
+    it 'can validate placed ship length' do
+      expect(@board.valid_placement?(@cruiser, ["A1", "A2"])).to eq(false)
+      expect(@board.valid_placement?(@submarine, ["A2", "A3", "A4"]).to eq(false))
+    end
+
+    it 'can validate consecutive coordinates' do
+      
+    end
+  end
 end
