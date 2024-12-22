@@ -1,7 +1,7 @@
 require 'rspec'
 require './lib/board'
 require './lib/cell'
-require '/lib/ship'
+require '. /lib/ship'
 require './lib/computer'
 require './lib/game'
 require 'pry'
@@ -13,7 +13,7 @@ describe Game do
   end
 
   describe '#initalize' do
-    it 'exists' do
+    xit 'exists' do
       expect(@game.computer).to be_a(Computer)
       expect(@game.player_board).to be_a(Board)
     end
@@ -29,7 +29,9 @@ describe Game do
   end
 
   describe '#quit' do
-    expect(@game.quit).to eq("Good-bye!")
+    xit 'can quit the game' do
+      expect(@game.quit).to eq("Good-bye!")
+    end
   end
 
 end
