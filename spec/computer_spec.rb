@@ -40,5 +40,17 @@ describe Computer do
 
             expect(target.fired_upon?).to eq(true)
         end
+
+        it 'will not fire upon the same cell twice' do
+            16.times do
+                @computer.fire_upon(@player_board)
+            end
+
+            @player_board.cells.each do |cell|
+              expect(cell[1].fired_upon?).to eq(true)
+            end
+        end
+
     end
+
 end
