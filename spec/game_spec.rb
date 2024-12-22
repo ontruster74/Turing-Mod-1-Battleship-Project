@@ -19,6 +19,17 @@ describe Game do
     end
   end
 
-  
+  describe '#gameplay' do
+    
+  end
+
+
+  describe '#turn' do
+    
+  end
+
+  describe '#quit' do
+    expect(@game.quit).to eq("Good-bye!")
+  end
 
 end
