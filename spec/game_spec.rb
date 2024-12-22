@@ -1,7 +1,7 @@
 require 'rspec'
 require './lib/board'
 require './lib/cell'
-require '. /lib/ship'
+require './lib/ship'
 require './lib/computer'
 require './lib/game'
 require 'pry'
@@ -12,8 +12,8 @@ describe Game do
     @board = Board.new
   end
 
-  describe '#initalize' do
-    xit 'exists' do
+  describe '#intro' do
+    xit 'creates two opposing boards' do
       expect(@game.computer).to be_a(Computer)
       expect(@game.player_board).to be_a(Board)
     end
