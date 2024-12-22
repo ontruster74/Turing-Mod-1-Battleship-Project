@@ -26,7 +26,7 @@ describe Computer do
         it 'can place ships' do
             coordinates = @computer.place_ship(@cruiser)
 
-            expect(@board.valid_placement?(@cruiser, coordinates)).to eq(true)
+            expect(Board.new.valid_placement?(@cruiser, coordinates)).to eq(true)
 
             coordinates.each do |coordinate|
                 expect(@board.cells[coordinate].empty?).to eq(false)
