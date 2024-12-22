@@ -9,7 +9,7 @@ class Computer
         coordinates = []
         while true do 
             rand_coord = @board.cells.keys.sample { |cell| @board.cells[cell] }
-            horizontal = [false, false].sample
+            horizontal = [true, false].sample
 
             rand_letter = rand_coord[0]
             rand_num = rand_coord[1]
@@ -26,5 +26,17 @@ class Computer
         end
         @board.place(ship, coordinates)
         return coordinates
+    end
+
+    def fire_upon(board)
+        while true do
+            rand_cell = board.cells[board.cells.keys.sample { |cell| board.cells[cell] }]
+            
+            if !(rand_cell.fired_upon?)
+                rand_cell.fire_upon
+                break
+            end
+        end
+        rand_cell
     end
 end
