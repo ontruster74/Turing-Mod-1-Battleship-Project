@@ -81,4 +81,20 @@ describe Board do
       expect(@board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
     end
   end
+
+  describe '#lost_game?' do
+    it 'can verify that a board has not lost the game' do
+      @board.place(@cruiser, ["A1", "A2", "A3"])
+      @board.cells["A1"].fire_upon
+      expect(@board.lost_game?).to eq(false)
+    end
+
+    it 'can verify that a board has lost the game' do
+      @board.place(@cruiser, ["A1", "A2", "A3"])
+      @board.cells["A1"].fire_upon
+      @board.cells["A2"].fire_upon
+      @board.cells["A3"].fire_upon
+      expect(@board.lost_game?).to eq(true)
+    end
+  end
 end

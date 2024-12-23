@@ -68,4 +68,13 @@ class Board
     return final_render
   end
 
+  def lost_game?
+    @cells.each do |cell|
+      if (!(cell[1].empty?) && !(cell[1].ship.sunk?))
+        return false
+      end
+    end
+    return true
+  end
+
 end
