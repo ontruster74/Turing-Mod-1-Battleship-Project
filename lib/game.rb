@@ -59,58 +59,36 @@ class Game
 
     puts "Computer is placing ships..."
     puts
+    comp_ships = ships.map {|ship| Ship.new(ship.name, ship.length)}
+    comp_ships.each {|ship| @computer.place_ship(ship)}
+
+    ships.each do |ship| 
+      puts "Where would you like to place your #{ship.name}?"
+
+      while true do
+        puts @player_board.render(true)
+        puts
+        coordinates = []
+  
+        ship.length.times do
+          puts "Enter a coordinate:"
+          coordinates << gets.chomp
+          puts
+        end
+  
+        if @player_board.valid_placement?(ship, coordinates)
+          @player_board.place(ship, coordinates)
+          puts "#{ship.name} in place!"
+          puts
+          break
+        end
+  
+        puts "Invalid Placement. Make sure your coordinates are on the board and in alphabetical/descending order!\n"
+        puts
+      end
+    end
+
     
-
-    puts "Where would you like to place your Cruiser?"
-    puts
-
-    while true do
-      puts @player_board.render(true)
-      puts
-      coordinates = []
-
-      cruiser.length.times do
-        puts "Enter a coordinate:"
-        coordinates << gets.chomp
-        puts
-      end
-
-      if @player_board.valid_placement?(cruiser, coordinates)
-        @player_board.place(cruiser, coordinates)
-        puts "Cruiser in place!"
-        puts
-        break
-      end
-
-      puts "Invalid Placement. Make sure your coordinates are on the board and in alphabetical/descending order!\n"
-      puts
-    end
-
-    puts "Where would you like to place your Submarine?"
-    puts
-
-    while true do
-      puts @player_board.render(true)
-      puts
-      coordinates = []
-
-      submarine.length.times do
-        puts "Enter a coordinate:"
-        coordinates << gets.chomp
-        puts
-      end
-
-      if @player_board.valid_placement?(submarine, coordinates)
-        @player_board.place(submarine, coordinates)
-        puts "Submarine in place!"
-        puts
-        break
-      end
-
-      puts "Invalid Placement. Make sure your coordinates are on the board and in alphabetical/descending order!\n"
-      puts
-    end
-
     puts "==========GAME START==========="
     puts
 
