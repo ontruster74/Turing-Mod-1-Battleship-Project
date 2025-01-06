@@ -6,7 +6,7 @@ require 'pry'
 
 describe Board do
   before do
-    @board = Board.new
+    @board = Board.new(4, 4)
     @cruiser = Ship.new("Cruiser", 3)
     @submarine = Ship.new("Submarine", 2)
   end

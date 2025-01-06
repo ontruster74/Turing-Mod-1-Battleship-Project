@@ -1,10 +1,13 @@
 class Board
   attr_reader :cells
 
-  def initialize
+  def initialize(height = 4, width = 4)
+    @height = height
+    @width = width
+    
     @cells = {}
-    4.times do |letter|
-      4.times do |number|
+    @height.times do |letter|
+      @width.times do |number|
         @cells["#{(letter + 65).chr}#{number + 1}"] = Cell.new("#{(letter + 65).chr}#{number + 1}")
       end
     end
@@ -32,7 +35,8 @@ class Board
   end
 
   def render(show_ships = false)
-    final_render = "  1 2 3 4 \n"
+    range = (1..@width).to_a.join(" ")
+    final_render = "  #{range} \n"
 
     if show_ships
       renders = @cells.map do |key, cell| 
@@ -40,9 +44,9 @@ class Board
       end
 
       render_rows = []
-      renders.each_slice(4) {|row| render_rows << row}
+      renders.each_slice(@width) {|row| render_rows << row}
 
-      4.times do |index|
+      @height.times do |index|
         final_render << "#{(index + 65).chr}" 
         render_rows[index].each do |render|
           final_render << " #{render}"
@@ -53,9 +57,9 @@ class Board
     else
       renders = @cells.map{|key, cell| cell.render}
       render_rows = []
-      renders.each_slice(4) {|row| render_rows << row}
+      renders.each_slice(@width) {|row| render_rows << row}
 
-      4.times do |index|
+      @height.times do |index|
         final_render << "#{(index + 65).chr}" 
         render_rows[index].each do |render|
           final_render << " #{render}"
