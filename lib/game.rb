@@ -18,13 +18,27 @@ class Game
   end
 
   def gameplay
-    puts "What height would you like the board to be? Enter an integer:"
-    board_height = gets.chomp.to_i
-    puts
+    while true do
+      puts "What height would you like the board to be? Enter an integer:"
+      board_height = gets.chomp.to_i
+      puts
 
-    puts "What width would you like the board to be? Enter an integer:"
-    board_width = gets.chomp.to_i
-    puts
+      break if board_height > 0
+
+      puts "Invalid entry! Please enter an integer greater than 0."
+      puts
+    end
+
+    while true do
+      puts "What width would you like the board to be? Enter an integer:"
+      board_width = gets.chomp.to_i
+      puts
+
+      break if board_width > 0
+
+      puts "Invalid entry! Please enter an integer greater than 0."
+      puts
+    end
 
     @computer = Computer.new(Board.new(board_height, board_width))
     @player_board = Board.new(board_height, board_width)
@@ -36,6 +50,9 @@ class Game
     ships = []
 
     if custom_ships == "Y"
+      puts "Please account for your board size when creating your ships. Do not make more ships than your board can handle!"
+      puts
+
       while true do
         puts "Enter the name of your ship:"
         ship_name = gets.chomp
@@ -59,58 +76,36 @@ class Game
 
     puts "Computer is placing ships..."
     puts
+    comp_ships = ships.map {|ship| Ship.new(ship.name, ship.length)}
+    comp_ships.each {|ship| @computer.place_ship(ship)}
+
+    ships.each do |ship| 
+      puts "Where would you like to place your #{ship.name}?"
+
+      while true do
+        puts @player_board.render(true)
+        puts
+        coordinates = []
+  
+        ship.length.times do
+          puts "Enter a coordinate:"
+          coordinates << gets.chomp
+          puts
+        end
+  
+        if @player_board.valid_placement?(ship, coordinates)
+          @player_board.place(ship, coordinates)
+          puts "#{ship.name} in place!"
+          puts
+          break
+        end
+  
+        puts "Invalid Placement. Make sure your coordinates are on the board and in alphabetical/descending order!\n"
+        puts
+      end
+    end
+
     
-
-    puts "Where would you like to place your Cruiser?"
-    puts
-
-    while true do
-      puts @player_board.render(true)
-      puts
-      coordinates = []
-
-      cruiser.length.times do
-        puts "Enter a coordinate:"
-        coordinates << gets.chomp
-        puts
-      end
-
-      if @player_board.valid_placement?(cruiser, coordinates)
-        @player_board.place(cruiser, coordinates)
-        puts "Cruiser in place!"
-        puts
-        break
-      end
-
-      puts "Invalid Placement. Make sure your coordinates are on the board and in alphabetical/descending order!\n"
-      puts
-    end
-
-    puts "Where would you like to place your Submarine?"
-    puts
-
-    while true do
-      puts @player_board.render(true)
-      puts
-      coordinates = []
-
-      submarine.length.times do
-        puts "Enter a coordinate:"
-        coordinates << gets.chomp
-        puts
-      end
-
-      if @player_board.valid_placement?(submarine, coordinates)
-        @player_board.place(submarine, coordinates)
-        puts "Submarine in place!"
-        puts
-        break
-      end
-
-      puts "Invalid Placement. Make sure your coordinates are on the board and in alphabetical/descending order!\n"
-      puts
-    end
-
     puts "==========GAME START==========="
     puts
 
