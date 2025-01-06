@@ -28,15 +28,38 @@ class Game
 
     @computer = Computer.new(Board.new(board_height, board_width))
     @player_board = Board.new(board_height, board_width)
-    cruiser = Ship.new("Cruiser", 3)
-    submarine = Ship.new("Submarine", 2)
-    comp_cruiser = Ship.new("Cruiser", 3)
-    comp_submarine = Ship.new("Submarine", 2)
+
+    puts "Do you want to play with custom ships? (Y/N):"
+    custom_ships = gets.chomp
+    puts
+
+    ships = []
+
+    if custom_ships == "Y"
+      while true do
+        puts "Enter the name of your ship:"
+        ship_name = gets.chomp
+        puts
+
+        puts "Enter the length of your ship:"
+        ship_length = gets.chomp.to_i
+        puts
+
+        ships << Ship.new(ship_name, ship_length)
+
+        puts "Would you like to create another ship? (Y/N)"
+        another_ship = gets.chomp
+        puts
+
+        break if another_ship != "Y"
+      end
+    else
+      ships = [Ship.new("Cruiser", 3), Ship.new("Submarine", 2)]
+    end
 
     puts "Computer is placing ships..."
     puts
-    @computer.place_ship(comp_cruiser)
-    @computer.place_ship(comp_submarine)
+    
 
     puts "Where would you like to place your Cruiser?"
     puts
