@@ -2,8 +2,6 @@ class Game
   attr_reader :computer, :player_board
 
   def intro
-    @computer = Computer.new(Board.new)
-    @player_board = Board.new
     puts "--WELCOME TO BATTLESHIP--"
     puts "Enter p to play or q to quit"
     puts
@@ -20,6 +18,16 @@ class Game
   end
 
   def gameplay
+    puts "What height would you like the board to be? Enter an integer:"
+    board_height = gets.chomp.to_i
+    puts
+
+    puts "What width would you like the board to be? Enter an integer:"
+    board_width = gets.chomp.to_i
+    puts
+
+    @computer = Computer.new(Board.new(board_height, board_width))
+    @player_board = Board.new(board_height, board_width)
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
     comp_cruiser = Ship.new("Cruiser", 3)

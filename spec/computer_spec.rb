@@ -7,8 +7,8 @@ require './lib/cell'
 describe Computer do
     before do
         @cruiser = Ship.new("Cruiser", 3)
-        @board = Board.new
-        @player_board = Board.new
+        @board = Board.new(4, 4)
+        @player_board = Board.new(4, 4)
         @computer = Computer.new(@board)
     end
 
@@ -26,7 +26,7 @@ describe Computer do
         it 'can place ships' do
             coordinates = @computer.place_ship(@cruiser)
 
-            expect(Board.new.valid_placement?(@cruiser, coordinates)).to eq(true)
+            expect(Board.new(4, 4).valid_placement?(@cruiser, coordinates)).to eq(true)
 
             coordinates.each do |coordinate|
                 expect(@board.cells[coordinate].empty?).to eq(false)
