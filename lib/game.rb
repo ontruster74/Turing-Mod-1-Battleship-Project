@@ -18,13 +18,27 @@ class Game
   end
 
   def gameplay
-    puts "What height would you like the board to be? Enter an integer:"
-    board_height = gets.chomp.to_i
-    puts
+    while true do
+      puts "What height would you like the board to be? Enter an integer:"
+      board_height = gets.chomp.to_i
+      puts
 
-    puts "What width would you like the board to be? Enter an integer:"
-    board_width = gets.chomp.to_i
-    puts
+      break if board_height > 0
+
+      puts "Invalid entry! Please enter an integer greater than 0."
+      puts
+    end
+
+    while true do
+      puts "What width would you like the board to be? Enter an integer:"
+      board_width = gets.chomp.to_i
+      puts
+
+      break if board_width > 0
+
+      puts "Invalid entry! Please enter an integer greater than 0."
+      puts
+    end
 
     @computer = Computer.new(Board.new(board_height, board_width))
     @player_board = Board.new(board_height, board_width)
@@ -36,6 +50,9 @@ class Game
     ships = []
 
     if custom_ships == "Y"
+      puts "Please account for your board size when creating your ships. Do not make more ships than your board can handle!"
+      puts
+
       while true do
         puts "Enter the name of your ship:"
         ship_name = gets.chomp
