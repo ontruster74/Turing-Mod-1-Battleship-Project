@@ -3,6 +3,7 @@ require './lib/computer'
 require './lib/board'
 require './lib/ship'
 require './lib/cell'
+require 'pry'
 
 describe Computer do
     before do
@@ -49,6 +50,26 @@ describe Computer do
             @player_board.cells.each do |cell|
               expect(cell[1].fired_upon?).to eq(true)
             end
+        end
+
+        it 'will fire on an adjacent space when scoring a hit' do
+            battleship = Ship.new("Battleship", 4)
+            @board.place(battleship, ["A1", "A2", "A3", "A4"])
+            @board.place(battleship, ["B1", "B2", "B3", "B4"])
+            @board.place(battleship, ["C1", "C2", "C3", "C4"])
+            @board.place(battleship, ["D1", "D2", "D3", "D4"])
+            
+            target = @computer.fire_upon(@board)
+
+            north = "#{(target.coordinate[0].ord - 1).chr}#{target.coordinate[1]}"
+            south = "#{(target.coordinate[0].ord + 1).chr}#{target.coordinate[1]}"
+            east = "#{target.coordinate[0]}#{(target.coordinate[1].to_i + 1).to_s}"
+            west = "#{target.coordinate[0]}#{(target.coordinate[1].to_i - 1).to_s}"
+            adjacents = [north, south, east, west]
+
+            target2 = @computer.fire_upon(@board)
+            expect(adjacents.include?(target2.coordinate)).to eq(true)
+
         end
 
     end
