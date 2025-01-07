@@ -3,6 +3,7 @@ class Computer
 
     def initialize(board)
         @board = board
+        @last_hit = nil
     end
 
     def place_ship(ship)
@@ -29,14 +30,43 @@ class Computer
     end
 
     def fire_upon(board)
-        while true do
-            rand_cell = board.cells[board.cells.keys.sample { |cell| board.cells[cell] }]
-            
-            if !(rand_cell.fired_upon?)
-                rand_cell.fire_upon
-                break
+        target_cell = nil
+
+        if @last_hit
+            north = "#{(@last_hit.coordinate[0].ord - 1).chr}#{@last_hit.coordinate[1]}"
+            south = "#{(@last_hit.coordinate[0].ord + 1).chr}#{@last_hit.coordinate[1]}"
+            east = "#{@last_hit.coordinate[0]}#{(@last_hit.coordinate[1].to_i + 1).to_s}"
+            west = "#{@last_hit.coordinate[0]}#{(@last_hit.coordinate[1].to_i - 1).to_s}"
+
+            adjacents = [north, south, east, west]
+
+            successful_shot = false
+            adjacents.each do |coord|
+                if (board.valid_coordinate?(coord) && !(board.cells[coord].fired_upon?))
+                    target_cell = board.cells[coord]
+                    target_cell.fire_upon
+                    successful_shot = true
+                    break
+                end
+            end
+
+            if !successful_shot
+                @last_hit = false
+                fire_upon(board)
+            end
+        else
+            while true do
+                rand_cell = board.cells[board.cells.keys.sample { |cell| board.cells[cell] }]
+                
+                if !(rand_cell.fired_upon?)
+                    rand_cell.fire_upon
+                    target_cell = rand_cell
+                    break
+                end
             end
         end
-        rand_cell
+
+        @last_hit = target_cell if !target_cell.empty?
+        target_cell
     end
 end
