@@ -4,7 +4,8 @@ This is Sebastian McKee's and Rig Freyr's submission for the Turing Mod 1 Battle
 
 ====================================
 REFLECTION QUESTIONS
-=====================================
+====================================
+
 
 1. Iteration 3 did not provide an interaction pattern. How did you approach designing this iteration? 
 
