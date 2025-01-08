@@ -2,7 +2,6 @@
 
 This is Sebastian McKee's and Rig Freyr's submission for the Turing Mod 1 Battleship Game project.
 
-====================================
 REFLECTION QUESTIONS
 ====================================
 
