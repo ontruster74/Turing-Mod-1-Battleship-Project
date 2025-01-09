@@ -56,11 +56,10 @@ class Computer
             end
         else
             while true do
-                rand_cell = board.cells[board.cells.keys.sample { |cell| board.cells[cell] }]
-                
-                if !(rand_cell.fired_upon?)
-                    rand_cell.fire_upon
-                    target_cell = rand_cell
+                target_cell = board.cells[board.cells.keys.sample { |cell| board.cells[cell] }]
+
+                if !(target_cell.fired_upon?)
+                    target_cell.fire_upon
                     break
                 end
             end
